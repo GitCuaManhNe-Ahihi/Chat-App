@@ -24,7 +24,6 @@ export default function AuthProvider({children}) {
                 }
                 setUser({})
                 setLoading(false)
-                toast.success('Logout Success')
                 nav('/')
             })
 
