@@ -21,8 +21,6 @@ export default   function useFireStore(collections,condition) {
             });
             setDocuments(documents);
         });
-        
-       
         return unsubscribe;
     }, [collections,condition]);
     return Documents;

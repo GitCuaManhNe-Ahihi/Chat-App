@@ -3,7 +3,7 @@ import { collection, addDoc,Timestamp} from "firebase/firestore"; // import { co
 import { toast } from "react-toastify";
 
 export const addDocument = async (collectionName, data) => {
-      try {
+      try { 
            const docRef = await addDoc(collection(db,collectionName),{...data,createdAt: Timestamp.now()});
       }
         catch (error) {

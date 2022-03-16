@@ -1,16 +1,21 @@
+
 import { Button, Col, Row, Typography } from "antd";
 import {
     FacebookAuthProvider, getAdditionalUserInfo,
     GoogleAuthProvider, signInWithPopup
 } from "firebase/auth";
 import React from "react";
+import { db } from "../../firebase/config";
+import {doc, updateDoc} from "firebase/firestore";
 import { toast } from "react-toastify";
+import useFireStoreNoWhere from "../../hooks/useFireStoreNoWhere";
 import { auth } from "../../firebase/config";
 import { addDocument, generateKeywords } from "../../firebase/service";
 export default function Login() {
+  const all = useFireStoreNoWhere("users");
   const handleLoginGg = () => {
     signInWithPopup(auth, new GoogleAuthProvider())
-      .then((result) => {
+      .then(async (result) => {
         if (result) {
           if (getAdditionalUserInfo(result).isNewUser) {
             const {
@@ -20,8 +25,17 @@ export default function Login() {
               uid: uid,
               displayName: displayName,
               email: email,
+              status:true,
               photoURL: photoURL,
               keywords: generateKeywords(displayName),
+            });
+          }
+          else{
+            const thisUser = all.find((user) => user.uid === result.user.uid);
+            const idcollection = thisUser?.id
+            const updateRef = doc(db,'users',idcollection);
+            await updateDoc(updateRef,{
+                status:true
             });
           }
           toast.success("Login Success, Hello " + result.user.displayName);
@@ -45,6 +59,7 @@ export default function Login() {
               email: email,
               photoURL: photoURL,
               keywords: generateKeywords(displayName),
+              online:true
             });
           }
           toast.success("Login Success, Hello " + result.user.displayName);

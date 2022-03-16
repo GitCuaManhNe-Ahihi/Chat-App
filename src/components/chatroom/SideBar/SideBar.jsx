@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import ListRoom from './ListRoom';
 import UserInfo from './UserInfo';
+import UserOnline from './UserOnline/UserOnline';
 
 const Stylebar = styled.div`
     background: #1a001a;
@@ -19,6 +20,13 @@ export default function SideBar() {
         </Col>
         <Col span={24}>
             <ListRoom></ListRoom>
+        </Col>
+    </Row>
+    <Row>
+        <Col span={24}>
+          <UserOnline>'
+            
+          </UserOnline>
         </Col>
     </Row>
     </Stylebar>

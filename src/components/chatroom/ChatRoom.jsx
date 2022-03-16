@@ -1,7 +1,7 @@
 import React from 'react'
 import { Row,Col } from 'antd'
-import SideBar from './SideBar'
-import ChatWindow from './ChatWindow'
+import SideBar from './SideBar/SideBar'
+import ChatWindow from './ChatWindow/ChatWindow'
 export default function ChatRoom() {
   return (
     <Row>

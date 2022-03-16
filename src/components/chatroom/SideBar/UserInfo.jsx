@@ -1,12 +1,23 @@
 import { Avatar, Button, Col, Row, Typography } from "antd";
+import { doc, updateDoc } from "firebase/firestore";
 import React, { useContext } from "react";
-import { AuthContext } from "../../Context/AuthProvider";
-import { auth } from "../../firebase/config";
-
+import { AppContext } from "../../../Context/AppProvider";
+import { AuthContext } from '../../../Context/AuthProvider';
+import { auth } from "../../../firebase/config";
+import { db } from "../../../firebase/config";
 export default function UserInfo() {
   const {
-    user: { photoURL, displayName },
+    user: { photoURL, displayName},
   } = useContext(AuthContext);
+  const {idcollection } = useContext(AppContext)
+  const logOut =  async () =>{
+    const updateRef = doc(db,'users',idcollection);
+    await updateDoc(updateRef,{
+        status:false
+    });
+    auth.signOut();
+  
+  }
   return (
     <Row justify="space-between">
       <Col span={17}>
@@ -27,7 +38,7 @@ export default function UserInfo() {
         </Row>
       </Col>
       <Col span={7}>
-        <Button type="ghost" style={{color:'white'}} onClick={() => auth.signOut()}>
+        <Button type="ghost" style={{color:'white'}} onClick={() => logOut()}>
           Logout
         </Button>
       </Col>

@@ -21,10 +21,10 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-  const auth = getAuth(app);
+const auth = getAuth(app);
   
   const db = getFirestore(app)
-  //connect emulators
+ // connect emulators
   // connectAuthEmulator(auth,'http://localhost:9011');
   // if(window.location.hostname === 'localhost'){
   // connectFirestoreEmulator(db,"localhost",8181);

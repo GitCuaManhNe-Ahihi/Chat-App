@@ -2,7 +2,7 @@ import { PlusSquareOutlined } from "@ant-design/icons";
 import { Button, Collapse, Typography } from "antd";
 import React from "react";
 import styled from "styled-components";
-import { AppContext } from "../../Context/AppProvider";
+import { AppContext } from "../../../Context/AppProvider";
 const { Panel } = Collapse;
 const PanelStyle = styled(Panel)`
   &&& {
